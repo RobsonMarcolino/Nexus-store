@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 
 const GlitchText: React.FC<{ text: string, className?: string }> = ({ text, className }) => {
     const [glitchedText, setGlitchedText] = useState(text);

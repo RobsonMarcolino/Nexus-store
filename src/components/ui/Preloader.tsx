@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaPlay, FaShieldAlt } from 'react-icons/fa';
+import { FaPlay } from 'react-icons/fa';
 
 interface PreloaderProps {
     onComplete: () => void;

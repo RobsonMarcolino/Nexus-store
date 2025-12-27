@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { useToast } from './ToastContext';
 
 export interface Order {
     id: string;
@@ -19,7 +18,6 @@ const OrderContext = createContext<OrderContextType | undefined>(undefined);
 
 export const OrderProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [orders, setOrders] = useState<Order[]>([]);
-    const { showToast } = useToast();
 
     // Load from local storage
     useEffect(() => {

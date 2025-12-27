@@ -8,10 +8,9 @@ import { Link } from 'react-router-dom';
 interface Props {
     product: DetailedProduct; // Updated type
     index: number;
-    onQuickView: (product: DetailedProduct) => void;
 }
 
-const ProductCard = ({ product, index, onQuickView }: Props) => {
+const ProductCard = ({ product, index }: Props) => {
     const { addToCart } = useCart();
     const { toggleWishlist, isInWishlist } = useWishlist();
     const isWishlisted = isInWishlist(product.id);

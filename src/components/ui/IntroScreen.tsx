@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import GlitchText from './GlitchText';
 
 interface IntroScreenProps {
     onComplete: () => void;

@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useWishlist } from '../../context/WishlistContext';
 import { useOrders } from '../../context/OrderContext';
 import { useNavigate } from 'react-router-dom';
-import { FaUserAstronaut, FaBoxOpen, FaHeart, FaCog, FaTrophy, FaSignOutAlt, FaChevronRight, FaTimes, FaTruck, FaCheckCircle, FaTrash } from 'react-icons/fa';
+import { FaUserAstronaut, FaBoxOpen, FaHeart, FaCog, FaTrophy, FaSignOutAlt, FaChevronRight, FaTimes, FaCheckCircle, FaTrash } from 'react-icons/fa';
 
 const OrderDetailsModal = ({ order, isOpen, onClose }: { order: any, isOpen: boolean, onClose: () => void }) => {
     if (!order) return null;
