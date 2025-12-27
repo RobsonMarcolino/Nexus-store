@@ -73,7 +73,12 @@ const HeroV2: React.FC = () => {
                             className="relative flex items-center gap-4 px-8 py-4 bg-transparent border border-white/20 text-white font-bold text-sm tracking-widest uppercase hover:bg-white/10 transition-all skew-x-[-10deg] group backdrop-blur-sm overflow-hidden"
                         >
                             {/* Background Image */}
-                            <div className="absolute inset-0 bg-[url('https://s2-techtudo.glbimg.com/IGEpsR_2QPPbk7c5uity1skfJ-8=/0x0:1200x675/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2024/a/Z/c3hiH4RAKU3xd0s8pN8g/grand-theft-auto-vi-gta-6-rockstar-pagina-oficial-site.jpg')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity group-hover:scale-110 duration-700"></div>
+                            <div
+                                className="absolute inset-0 bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity group-hover:scale-110 duration-700"
+                                style={{
+                                    backgroundImage: "url('https://s2-techtudo.glbimg.com/IGEpsR_2QPPbk7c5uity1skfJ-8=/0x0:1200x675/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2024/a/Z/c3hiH4RAKU3xd0s8pN8g/grand-theft-auto-vi-gta-6-rockstar-pagina-oficial-site.jpg')"
+                                }}
+                            ></div>
 
                             <span className="w-10 h-10 flex items-center justify-center bg-white/10 rounded-full group-hover:scale-110 transition-transform skew-x-[10deg] relative z-10 border border-white/20">
                                 <FaPlay className="text-xs ml-1" />
