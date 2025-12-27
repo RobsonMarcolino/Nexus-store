@@ -10,7 +10,7 @@ const ProductArsenal = () => {
     const filtered = filter === 'Todos' ? productsData : productsData.filter(p => p.category === filter);
 
     return (
-        <section id="arsenal" className="py-20 relative bg-[#050B14]">
+        <section className="py-20 relative bg-[#050B14]">
             {/* Divider Line */}
             <div className="max-w-[1400px] mx-auto px-6 mb-16 relative">
                 <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
@@ -89,7 +89,6 @@ const ProductArsenal = () => {
                                 key={product.id}
                                 product={product}
                                 index={index}
-                                onQuickView={(p) => console.log('Quick View', p)}
                             />
                         ))}
                     </div>

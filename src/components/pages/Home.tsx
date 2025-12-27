@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import HeroV2 from '../features/HeroV2';
 import TrendingGames from '../features/TrendingGames';
@@ -7,6 +8,10 @@ import FlashSale from '../features/FlashSale';
 import BrandsMarquee from '../features/BrandsMarquee';
 
 const Home = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <motion.div
             initial={{ opacity: 0, x: -20 }}
