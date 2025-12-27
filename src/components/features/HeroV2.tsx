@@ -31,7 +31,6 @@ const HeroV2: React.FC = () => {
                 <div className="max-w-full lg:max-w-[900px]">
 
                     {/* Floating Badge */}
-                    {/* Floating Badge */}
                     <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brand-neon/20 to-brand-purple/20 border border-brand-neon/30 rounded-none mb-8 skew-x-[-10deg] animate-fade-in-up backdrop-blur-md">
                         <span className="w-2 h-2 bg-brand-neon rounded-full animate-pulse"></span>
                         <span className="text-brand-neon font-bold text-xs tracking-[0.2em] uppercase skew-x-[10deg]">Nova Geração Disponível</span>
@@ -41,7 +40,7 @@ const HeroV2: React.FC = () => {
                     <h1 className="text-5xl md:text-7xl lg:text-9xl font-display font-black text-white leading-[0.9] tracking-tight mb-8 animate-fade-in-up delay-100">
                         <GlitchText text="CYBER" />
                         <br />
-                        <span className="text-brand-neon"> {/* Changed from gradient to neon for Glitch visibility */}
+                        <span className="text-brand-neon">
                             <GlitchText text="REVOLUTION" />
                         </span>
                     </h1>
@@ -64,19 +63,22 @@ const HeroV2: React.FC = () => {
                             <div className="absolute inset-0 border-2 border-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </button>
 
-                        {/* Secondary Button */}
+                        {/* Secondary Button - Updated with GTA VI Image */}
                         <button
                             onClick={() => {
                                 setShowModal(true);
                                 playSound('click');
                             }}
                             onMouseEnter={() => playSound('hover')}
-                            className="flex items-center gap-4 px-8 py-4 bg-transparent border border-white/20 text-white font-bold text-sm tracking-widest uppercase hover:bg-white/10 transition-all skew-x-[-10deg] group backdrop-blur-sm"
+                            className="relative flex items-center gap-4 px-8 py-4 bg-transparent border border-white/20 text-white font-bold text-sm tracking-widest uppercase hover:bg-white/10 transition-all skew-x-[-10deg] group backdrop-blur-sm overflow-hidden"
                         >
-                            <span className="w-10 h-10 flex items-center justify-center bg-white/10 rounded-full group-hover:scale-110 transition-transform skew-x-[10deg]">
+                            {/* Background Image */}
+                            <div className="absolute inset-0 bg-[url('https://s2-techtudo.glbimg.com/IGEpsR_2QPPbk7c5uity1skfJ-8=/0x0:1200x675/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2024/a/Z/c3hiH4RAKU3xd0s8pN8g/grand-theft-auto-vi-gta-6-rockstar-pagina-oficial-site.jpg')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity group-hover:scale-110 duration-700"></div>
+
+                            <span className="w-10 h-10 flex items-center justify-center bg-white/10 rounded-full group-hover:scale-110 transition-transform skew-x-[10deg] relative z-10 border border-white/20">
                                 <FaPlay className="text-xs ml-1" />
                             </span>
-                            <span className="skew-x-[10deg]">VER TRAILER: GTA VI</span>
+                            <span className="skew-x-[10deg] relative z-10 shadow-black drop-shadow-md">VER TRAILER: GTA VI</span>
                         </button>
                     </div>
 
