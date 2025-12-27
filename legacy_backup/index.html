@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS | Loja Gamer Pro</title>
+
+    <!-- Google Fonts: Rajdhani (Gamer) & Inter (Texto) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Rajdhani:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            neon: '#00ff9d',
+                            dark: '#0a0a0a',
+                            purple: '#8b5cf6',
+                            card: '#161616',
+                            accent: '#1f1f1f'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Rajdhani', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'hero-pattern': "url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop')",
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-brand-dark text-gray-200 font-sans overflow-x-hidden selection:bg-brand-neon selection:text-brand-dark">
+
+    <!-- Matrix Background (Hidden by default) -->
+    <canvas id="matrix-canvas"
+        class="fixed top-0 left-0 w-full h-full z-[60] pointer-events-none hidden opacity-20"></canvas>
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer group">
+                    <i
+                        class="fa-solid fa-gamepad text-brand-neon text-3xl mr-2 group-hover:rotate-12 transition-transform"></i>
+                    <span
+                        class="font-display font-bold text-3xl tracking-wider text-white group-hover:text-brand-neon transition-colors">NEXUS</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home"
+                            class="hover:text-brand-neon px-3 py-2 rounded-md text-sm font-medium transition-colors">Início</a>
+                        <a href="#products"
+                            class="hover:text-brand-neon px-3 py-2 rounded-md text-sm font-medium transition-colors">Loja</a>
+                        <a href="#flash-sale"
+                            class="hover:text-brand-neon px-3 py-2 rounded-md text-sm font-medium transition-colors text-brand-purple font-bold">Ofertas</a>
+                        <a href="#faq"
+                            class="hover:text-brand-neon px-3 py-2 rounded-md text-sm font-medium transition-colors">Suporte</a>
+                    </div>
+                </div>
+
+                <!-- Icons -->
+                <div class="hidden md:flex items-center gap-6">
+                    <div class="relative cursor-pointer hover:text-brand-neon transition-colors transform hover:scale-110 duration-200"
+                        onclick="toggleCart()">
+                        <i class="fa-solid fa-cart-shopping text-xl"></i>
+                        <span id="cart-count"
+                            class="absolute -top-2 -right-2 bg-brand-neon text-brand-dark text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center opacity-0 transition-opacity duration-300">0</span>
+                    </div>
+                    <button onclick="window.location.href='login.html'"
+                        class="bg-transparent border border-brand-neon text-brand-neon hover:bg-brand-neon hover:text-brand-dark px-4 py-1.5 rounded font-display font-bold text-sm transition-all uppercase tracking-wider hover:shadow-[0_0_15px_#00ff9d]">
+                        Login
+                    </button>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden glass border-t border-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="text-white block px-3 py-2 rounded-md text-base font-medium">Início</a>
+                <a href="#products"
+                    class="text-gray-300 hover:text-brand-neon block px-3 py-2 rounded-md text-base font-medium">Loja</a>
+                <a href="#flash-sale"
+                    class="text-gray-300 hover:text-brand-neon block px-3 py-2 rounded-md text-base font-medium">Ofertas</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background Overlay -->
+        <div
+            class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center">
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/80 to-brand-dark/40"></div>
+            <div
+                class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVybkF0dHJpYnV0ZXM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNMCA0MEwwNDAgMCAwIDQwaDQwIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiIHN0cm9rZS13aWR0aD0iMSIvPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-30">
+            </div>
+        </div>
+
+        <div
+            class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left w-full pt-16 flex items-center justify-between">
+            <div class="sm:w-2/3 lg:w-1/2 z-20 reveal active">
+                <div
+                    class="inline-block px-4 py-1 mb-4 border border-brand-neon/30 rounded-full bg-brand-neon/5 backdrop-blur-sm">
+                    <span class="text-brand-neon font-display tracking-widest text-sm uppercase animate-pulse">● System
+                        Online</span>
+                </div>
+                <h1 class="text-5xl sm:text-7xl font-display font-bold text-white leading-tight mb-6">
+                    LEVEL UP <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-neon to-brand-purple">YOUR
+                        GAME</span>
+                </h1>
+                <p class="text-gray-400 text-lg sm:text-xl mb-8 max-w-xl leading-relaxed">
+                    A performance extrema encontra o design definitivo. Equipamentos de elite para gamers que não
+                    aceitam perder.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center sm:justify-start">
+                    <button
+                        class="bg-brand-neon text-brand-dark px-8 py-4 font-display font-bold text-lg cyber-clip hover:bg-white hover:shadow-[0_0_30px_#00ff9d] transition-all transform hover:-translate-y-1 relative overflow-hidden group">
+                        <span class="relative z-10">COMPRAR AGORA</span>
+                    </button>
+                    <button
+                        class="border border-white/20 bg-white/5 backdrop-blur px-8 py-4 font-display font-bold text-lg cyber-clip-inverse text-white hover:bg-brand-purple hover:border-brand-purple transition-all">
+                        VER OFERTAS
+                    </button>
+                </div>
+            </div>
+
+            <!-- 3D Cube Widget (CSS) -->
+            <div
+                class="hidden lg:flex w-1/2 h-full absolute right-0 top-0 bottom-0 pointer-events-none items-center justify-center">
+                <div class="scene-3d">
+                    <div class="cube">
+                        <div class="face front">NEXUS</div>
+                        <div class="face back">GAMER</div>
+                        <div class="face right">PRO</div>
+                        <div class="face left">ELITE</div>
+                        <div class="face top">TECH</div>
+                        <div class="face bottom">2025</div>
+                        <div class="cube-inner">
+                            <img src="https://images.unsplash.com/photo-1612287232817-60286063af46?q=80&w=1000&auto=format&fit=crop"
+                                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-50 group-hover:opacity-30">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-8 w-full">
+                                <div class="flex justify-between items-end">
+                                    <div>
+                                        <h3
+                                            class="text-3xl font-display font-bold text-white mb-2 group-hover:text-brand-neon transition-colors">
+                                            PERIFÉRICOS</h3>
+                                        <p
+                                            class="text-gray-400 text-sm transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 delay-75">
+                                            Teclados, Mouses e Headsets</p>
+                                    </div>
+                                    <div
+                                        class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transform translate-x-4 group-hover:translate-x-0 transition-all duration-300">
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Cat 2 -->
+                        <div
+                            class="group relative overflow-hidden rounded-2xl h-64 border border-white/10 cursor-pointer bg-[#111]">
+                            <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?q=80&w=1000&auto=format&fit=crop"
+                                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-50 group-hover:opacity-30">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-8 w-full">
+                                <div class="flex justify-between items-end">
+                                    <div>
+                                        <h3
+                                            class="text-3xl font-display font-bold text-white mb-2 group-hover:text-brand-purple transition-colors">
+                                            HARDWARE</h3>
+                                        <p
+                                            class="text-gray-400 text-sm transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 delay-75">
+                                            GPUs, CPUs e Placas-mãe</p>
+                                    </div>
+                                    <div
+                                        class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transform translate-x-4 group-hover:translate-x-0 transition-all duration-300">
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Cat 3 -->
+                        <div
+                            class="group relative overflow-hidden rounded-2xl h-64 border border-white/10 cursor-pointer bg-[#111]">
+                            <img src="https://images.unsplash.com/photo-1552831388-6a0b3575b32a?q=80&w=2070&auto=format&fit=crop"
+                                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-50 group-hover:opacity-30">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-8 w-full">
+                                <div class="flex justify-between items-end">
+                                    <div>
+                                        <h3
+                                            class="text-3xl font-display font-bold text-white mb-2 group-hover:text-blue-500 transition-colors">
+                                            MONITORES</h3>
+                                        <p
+                                            class="text-gray-400 text-sm transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 delay-75">
+                                            Alta taxa de atualização</p>
+                                    </div>
+                                    <div
+                                        class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transform translate-x-4 group-hover:translate-x-0 transition-all duration-300">
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section id="products" class="py-20 relative bg-[#0f0f0f]">
+        <!-- Decorative Grid Background -->
+        <div class="absolute inset-0"
+            style="background-image: radial-gradient(#333 1px, transparent 1px); background-size: 40px 40px; opacity: 0.1;">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                <div>
+                    <h2 class="text-4xl font-display font-bold text-white mb-2">DESTAQUES <span
+                            class="text-brand-neon">PRO</span></h2>
+                    <div class="h-1 w-20 bg-brand-neon rounded-full"></div>
+                </div>
+                <div class="flex gap-4 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-hide">
+                    <button
+                        class="px-6 py-2 rounded-full border border-brand-neon bg-brand-neon/10 text-brand-neon font-bold text-sm whitespace-nowrap hover:bg-brand-neon hover:text-black transition-colors">Todos</button>
+                    <button
+                        class="px-6 py-2 rounded-full border border-white/10 text-gray-400 font-bold text-sm whitespace-nowrap hover:border-brand-neon hover:text-white transition-colors">Hardware</button>
+                    <button
+                        class="px-6 py-2 rounded-full border border-white/10 text-gray-400 font-bold text-sm whitespace-nowrap hover:border-brand-neon hover:text-white transition-colors">Periféricos</button>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Products injected by JS -->
+            </div>
+
+            <div class="mt-16 text-center">
+                <a href="#"
+                    class="group inline-flex items-center gap-2 text-gray-400 hover:text-brand-neon transition-colors font-display font-bold tracking-wider">
+                    VER LOJA COMPLETA
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Offer / Newsletter -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-brand-purple/5"></div>
+        <div class="absolute -right-20 -bottom-20 w-[500px] h-[500px] bg-brand-purple/20 rounded-full blur-[120px]">
+        </div>
+        <div class="absolute -left-20 -top-20 w-[500px] h-[500px] bg-brand-neon/10 rounded-full blur-[120px]"></div>
+
+        <div class="max-w-4xl mx-auto px-4 relative z-10 text-center">
+            <h2 class="text-3xl md:text-6xl font-display font-bold text-white mb-6 tracking-tight">JUNTE-SE AO <span
+                    class="text-brand-purple">SQUAD</span></h2>
+            <p class="text-gray-400 mb-10 max-w-2xl mx-auto text-lg leading-relaxed">
+                Receba ofertas exclusivas, drop de produtos limitados e dicas de setup diretamente no seu e-mail. Não
+                mandamos spam, apenas <span class="text-brand-neon">loot épico</span>.
+            </p>
+
+            <form onsubmit="event.preventDefault(); showToast('Inscrito com sucesso!', 'success')"
+                class="flex flex-col sm:flex-row gap-4 justify-center max-w-lg mx-auto">
+                <input type="email" placeholder="Seu melhor e-mail"
+                    class="px-6 py-4 bg-black/50 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-neon focus:ring-1 focus:ring-brand-neon flex-1 transition-all">
+                <button type="submit"
+                    class="bg-brand-neon text-brand-dark font-bold px-8 py-4 rounded-lg hover:bg-white transition-colors uppercase tracking-wider relative overflow-hidden">
+                    Inscrever-se
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black pt-20 pb-10 border-t border-white/5 font-sans">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center mb-6">
+                        <i class="fa-solid fa-gamepad text-brand-neon text-3xl mr-3"></i>
+                        <span class="font-display font-bold text-3xl text-white tracking-wider">NEXUS</span>
+                    </div>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">
+                        A loja definitiva para quem vive o jogo. Hardware de alta performance, periféricos de precisão e
+                        a melhor comunidade.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-gray-400 hover:bg-[#5865F2] hover:text-white transition-all transform hover:-translate-y-1">
+                            <i class="fa-brands fa-discord text-lg"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-gray-400 hover:bg-[#9146FF] hover:text-white transition-all transform hover:-translate-y-1">
+                            <i class="fa-brands fa-twitch text-lg"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-gray-400 hover:bg-[#E1306C] hover:text-white transition-all transform hover:-translate-y-1">
+                            <i class="fa-brands fa-instagram text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6 font-display uppercase tracking-wider text-sm">Navegação</h4>
+                    <ul class="space-y-4 text-gray-500 text-sm">
+                        <li><a href="#" class="hover:text-brand-neon transition-colors flex items-center gap-2"><i
+                                    class="fa-solid fa-chevron-right text-xs opacity-0 hover:opacity-100 transition-opacity"></i>
+                                Lançamentos</a></li>
+                        <li><a href="#" class="hover:text-brand-neon transition-colors">Mais Vendidos</a></li>
+                        <li><a href="#" class="hover:text-brand-neon transition-colors">PC Builds</a></li>
+                        <li><a href="#" class="hover:text-brand-neon transition-colors">Ofertas da Semana</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6 font-display uppercase tracking-wider text-sm">Suporte</h4>
+                    <ul class="space-y-4 text-gray-500 text-sm">
+                        <li><a href="#" class="hover:text-brand-neon transition-colors">Central de Ajuda</a></li>
+                        <li><a href="#" class="hover:text-brand-neon transition-colors">Rastrear Pedido</a></li>
+                        <li><a href="#" class="hover:text-brand-neon transition-colors">Garantia e Trocas</a></li>
+                        <li><a href="#" class="hover:text-brand-neon transition-colors">Fale Conosco</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6 font-display uppercase tracking-wider text-sm">Pagamento Seguro
+                    </h4>
+                    <div class="grid grid-cols-4 gap-2">
+                        <div
+                            class="bg-white/5 h-10 rounded flex items-center justify-center text-gray-400 hover:bg-white/10 transition-colors">
+                            <i class="fa-brands fa-cc-visa text-xl"></i>
+                        </div>
+                        <div
+                            class="bg-white/5 h-10 rounded flex items-center justify-center text-gray-400 hover:bg-white/10 transition-colors">
+                            <i class="fa-brands fa-cc-mastercard text-xl"></i>
+                        </div>
+                        <div
+                            class="bg-white/5 h-10 rounded flex items-center justify-center text-gray-400 hover:bg-white/10 transition-colors">
+                            <i class="fa-solid fa-barcode text-xl"></i>
+                        </div>
+                        <div
+                            class="bg-white/5 h-10 rounded flex items-center justify-center text-gray-400 hover:bg-white/10 transition-colors">
+                            <i class="fa-brands fa-pix text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-600 text-sm text-center md:text-left mb-4 md:mb-0">
+                    &copy; 2024 Nexus Gaming Store. Todos os direitos reservados.
+                </p>
+                <div class="flex gap-8 text-sm text-gray-600 font-medium">
+                    <a href="#" class="hover:text-white transition-colors">Privacidade</a>
+                    <a href="#" class="hover:text-white transition-colors">Termos</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar"
+        class="fixed inset-y-0 right-0 w-full md:w-[450px] bg-[#0a0a0a] z-[60] transform translate-x-full transition-transform duration-500 border-l border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] flex flex-col">
+        <div class="p-6 border-b border-white/5 flex justify-between items-center bg-[#0f0f0f]">
+            <div class="flex items-center gap-3">
+                <i class="fa-solid fa-cart-shopping text-brand-neon"></i>
+                <h3 class="text-xl font-display font-bold text-white tracking-wide">SEU CARRINHO</h3>
+            </div>
+            <button data-toggle-cart
+                class="text-gray-400 hover:text-white transition-colors w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <!-- Quick View Modal (Static Container for Module to use) -->
+            <div id="quick-view-modal" class="fixed inset-0 z-[80] hidden flex items-center justify-center px-4">
+                <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal()"></div>
+                <div
+                    class="relative bg-[#161616] border border-white/10 rounded-xl w-full max-w-4xl p-6 shadow-2xl overflow-hidden flex flex-col md:flex-row gap-8 animate-float">
+                    <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10"><i
+                            class="fa-solid fa-xmark text-2xl"></i></button>
+
+                    <div class="w-full md:w-1/2 relative bg-white/5 rounded-lg flex items-center justify-center p-4">
+                        <img id="modal-img" src="" class="max-h-80 object-contain">
+                    </div>
+
+                    <div class="w-full md:w-1/2 flex flex-col justify-center">
+                        <span class="text-brand-neon font-bold text-sm mb-2 uppercase tracking-wide">Nexus Gear</span>
+                        <h3 id="modal-title" class="text-3xl font-display font-bold text-white mb-4">Product Name</h3>
+                        <div class="flex items-center gap-2 text-yellow-500 mb-4">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i>
+                            <span class="text-gray-500 text-sm ml-2">(128 avaliações)</span>
+                        </div>
+                        <p class="text-gray-400 mb-6 leading-relaxed">
+                            Equipamento de alta performance projetado para eSports. Latência ultra-baixa, materiais
+                            premium e durabilidade extrema para aguentar suas sessões mais intensas.
+                        </p>
+                        <div class="flex items-center justify-between mt-auto">
+                            <span id="modal-price" class="text-3xl font-bold text-white">R$ 0,00</span>
+                            <button id="modal-add-btn"
+                                class="bg-brand-neon text-black font-bold px-8 py-3 rounded hover:bg-white transition-colors">
+                                ADICIONAR AO CARRINHO
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="cart-overlay" onclick="toggleCart()"
+                class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[55] hidden transition-opacity opacity-0"></div>
+            <div id="toast-container" class="fixed bottom-5 right-5 z-[70] flex flex-col gap-2 pointer-events-none">
+            </div>
+
+            <!-- Scripts -->
+            <script type="module" src="js/main.js"></script>
+</body>
+
+</html>

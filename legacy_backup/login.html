@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | NEXUS</title>
+
+    <!-- Fonts & Tailwind -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Rajdhani:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            neon: '#00ff9d',
+                            dark: '#0a0a0a',
+                            purple: '#8b5cf6'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Rajdhani', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-[#0a0a0a] text-white h-screen flex items-center justify-center overflow-hidden relative">
+
+    <!-- Cursor Elements -->
+    <div id="cursor"></div>
+    <div id="cursor-follower"></div>
+
+    <!-- Background Elements -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div
+            class="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-20">
+        </div>
+        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#0a0a0a] via-[#0a0a0a]/90 to-[#0a0a0a]">
+        </div>
+
+        <!-- Animated Blobs -->
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-neon/10 rounded-full blur-[150px] animate-pulse">
+        </div>
+    </div>
+
+    <!-- Login Container -->
+    <div class="w-full max-w-md p-8 relative z-10">
+        <!-- Logo -->
+        <div class="text-center mb-10 reveal active">
+            <a href="index.html" class="inline-flex items-center group">
+                <i
+                    class="fa-solid fa-gamepad text-brand-neon text-4xl mr-3 group-hover:rotate-12 transition-transform duration-500"></i>
+                <span
+                    class="font-display font-bold text-4xl tracking-wider text-white group-hover:text-brand-neon transition-colors">NEXUS</span>
+            </a>
+            <p class="text-gray-500 mt-2 font-medium">Acesse o painel de comando</p>
+        </div>
+
+        <!-- Form Card -->
+        <div class="glass p-8 rounded-2xl border border-white/10 shadow-2xl relative overflow-hidden group reveal active"
+            style="transition-delay: 0.1s">
+            <!-- Glitch decoration -->
+            <div class="absolute top-0 left-0 w-1 h-full bg-brand-neon transition-all duration-300 group-hover:h-1/2">
+            </div>
+
+            <form onsubmit="event.preventDefault(); window.location.href='index.html'" class="space-y-6">
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Email /
+                        User</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-user absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                        <input type="email"
+                            class="w-full bg-black/40 border border-white/10 rounded-lg py-3 pl-12 pr-4 text-white focus:outline-none focus:border-brand-neon focus:ring-1 focus:ring-brand-neon transition-all placeholder-gray-600"
+                            placeholder="player@nexus.com">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Senha</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                        <input type="password"
+                            class="w-full bg-black/40 border border-white/10 rounded-lg py-3 pl-12 pr-4 text-white focus:outline-none focus:border-brand-neon focus:ring-1 focus:ring-brand-neon transition-all placeholder-gray-600"
+                            placeholder="••••••••">
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between text-sm">
+                    <label class="flex items-center text-gray-400 hover:text-white cursor-pointer transition-colors">
+                        <input type="checkbox" class="mr-2 accent-brand-neon bg-white/10 border-white/20 rounded">
+                        Lembrar-me
+                    </label>
+                    <a href="#" class="text-brand-neon hover:text-white transition-colors">Esqueceu a senha?</a>
+                </div>
+
+                <button
+                    class="w-full bg-brand-neon text-brand-dark font-display font-bold text-lg py-4 rounded-lg cyber-clip hover:bg-white hover:scale-[1.02] transition-all shadow-[0_0_20px_rgba(0,255,157,0.2)]">
+                    LOGIN SYSTEM
+                </button>
+            </form>
+
+            <div class="mt-8 text-center text-sm text-gray-500">
+                Não tem uma conta? <a href="#"
+                    class="text-white font-bold hover:text-brand-neon transition-colors">Criar conta</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple Custom Cursor Logic for Login Page
+        const cursor = document.getElementById('cursor');
+        const followers = document.getElementById('cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+
+            setTimeout(() => {
+                followers.style.left = e.clientX + 'px';
+                followers.style.top = e.clientY + 'px';
+            }, 50);
+        });
+
+        document.querySelectorAll('a, button, input').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('hover-active'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('hover-active'));
+        });
+    </script>
+</body>
+
+</html>

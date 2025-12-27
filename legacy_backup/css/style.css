@@ -1,0 +1,305 @@
+/* Global Settings */
+:root {
+    --color-brand-neon: #00ff9d;
+    --color-brand-dark: #0a0a0a;
+    --color-brand-purple: #8b5cf6;
+    --color-brand-card: #161616;
+}
+
+body {
+    cursor: none;
+    /* Hide default cursor */
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #00ff9d;
+}
+
+/* Cyberpunk Button Clip Path */
+.cyber-clip {
+    clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+}
+
+.cyber-clip-inverse {
+    clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 10% 100%, 0 70%);
+}
+
+/* Glitch Text Effect Hover */
+.glitch-hover:hover {
+    animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+    color: #00ff9d;
+}
+
+@keyframes glitch {
+    0% {
+        transform: translate(0)
+    }
+
+    20% {
+        transform: translate(-2px, 2px)
+    }
+
+    40% {
+        transform: translate(-2px, -2px)
+    }
+
+    60% {
+        transform: translate(2px, 2px)
+    }
+
+    80% {
+        transform: translate(2px, -2px)
+    }
+
+    100% {
+        transform: translate(0)
+    }
+}
+
+/* Glassmorphism Utilities */
+.glass {
+    background: rgba(10, 10, 10, 0.85);
+    /* Darker for better contrast */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.product-card {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.product-card:hover .product-img {
+    transform: scale(1.1);
+}
+
+.product-card:hover {
+    border-color: #00ff9d;
+    box-shadow: 0 0 30px rgba(0, 255, 157, 0.15);
+    transform: translateY(-5px);
+}
+
+/* Image Mask for consistency */
+.img-overlay {
+    position: relative;
+    overflow: hidden;
+}
+
+.img-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 50%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Utility Animations */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* ----------------------------------------------------------- */
+/* NEW ADDITIONS FOR EXPERIENCE */
+/* ----------------------------------------------------------- */
+
+/* 3D Tesseract Animation */
+.scene-3d {
+    width: 300px;
+    height: 300px;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+.cube {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: rotate-cube 15s infinite linear;
+}
+
+.face {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border: 2px solid var(--color-brand-neon);
+    box-shadow: 0 0 20px rgba(0, 255, 157, 0.2);
+    background: rgba(0, 255, 157, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: var(--color-brand-neon);
+    opacity: 0.8;
+    backdrop-filter: blur(2px);
+}
+
+/* Inner Cube */
+.cube-inner {
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    top: 75px;
+    left: 75px;
+    transform-style: preserve-3d;
+    animation: rotate-cube-inner 10s infinite reverse linear;
+}
+
+.face-inner {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border: 2px solid var(--color-brand-purple);
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+    background: rgba(139, 92, 246, 0.1);
+}
+
+/* Cube Transforms */
+.front {
+    transform: rotateY(0deg) translateZ(150px);
+}
+
+.back {
+    transform: rotateY(180deg) translateZ(150px);
+}
+
+.right {
+    transform: rotateY(90deg) translateZ(150px);
+}
+
+.left {
+    transform: rotateY(-90deg) translateZ(150px);
+}
+
+.top {
+    transform: rotateX(90deg) translateZ(150px);
+}
+
+.bottom {
+    transform: rotateX(-90deg) translateZ(150px);
+}
+
+/* Inner Cube Transforms */
+.front-in {
+    transform: rotateY(0deg) translateZ(75px);
+}
+
+.back-in {
+    transform: rotateY(180deg) translateZ(75px);
+}
+
+.right-in {
+    transform: rotateY(90deg) translateZ(75px);
+}
+
+.left-in {
+    transform: rotateY(-90deg) translateZ(75px);
+}
+
+.top-in {
+    transform: rotateX(90deg) translateZ(75px);
+}
+
+.bottom-in {
+    transform: rotateX(-90deg) translateZ(75px);
+}
+
+@keyframes rotate-cube {
+    0% {
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateX(360deg) rotateY(360deg);
+    }
+}
+
+@keyframes rotate-cube-inner {
+    0% {
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateX(360deg) rotateY(360deg);
+    }
+}
+
+/* Custom Cursor */
+#cursor {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-brand-neon);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
+    mix-blend-mode: difference;
+}
+
+#cursor-follower {
+    width: 8px;
+    height: 8px;
+    background: var(--color-brand-neon);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: left 0.1s, top 0.1s;
+}
+
+/* Interactive Cursor States */
+body:hover #cursor {
+    opacity: 1;
+}
+
+/* Applied via JS to body when hovering interactive elements */
+body.hover-active #cursor {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0, 255, 157, 0.2);
+    border-color: transparent;
+}
+
+/* Scroll Animations */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}

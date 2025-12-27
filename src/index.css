@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply bg-[#050B14] text-gray-200 antialiased overflow-x-hidden;
+    }
+
+    /* Custom Scrollbar - Minimal Dark */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #050B14;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #1f2937;
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #4f46e5;
+        /* Indigo-600 */
+    }
+}
+
+@layer components {
+
+    /* 3D Gamer Button */
+    .btn-3d {
+        @apply relative transform transition-all duration-100 ease-in-out active:translate-y-1 active:shadow-none;
+        /* Beveled Border effect via shadows */
+        box-shadow:
+            0 4px 0 theme('colors.brand.purple'),
+            0 5px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .btn-3d:hover {
+        @apply -translate-y-[2px];
+        box-shadow:
+            0 6px 0 theme('colors.brand.purple'),
+            0 7px 15px rgba(0, 243, 255, 0.4);
+    }
+
+    .btn-3d-neon {
+        @apply relative transform transition-all duration-100 ease-in-out active:translate-y-1 active:shadow-none;
+        box-shadow:
+            0 4px 0 theme('colors.brand.neon'),
+            0 5px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .btn-3d-neon:hover {
+        @apply -translate-y-[2px];
+        box-shadow:
+            0 6px 0 theme('colors.brand.neon'),
+            0 7px 15px rgba(0, 243, 255, 0.4);
+    }
+
+    /* Cyberpunk Clip Paths */
+    .cyber-clip {
+        clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+    }
+
+    .cyber-clip-inverse {
+        clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 10% 100%, 0 70%);
+    }
+
+    /* Glassmorphism */
+    .glass {
+        @apply bg-brand-card/70 backdrop-blur-md border border-white/5;
+    }
+
+    /* Gamer Text Glitch Effect */
+    .glitch-text:hover {
+        animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+        @apply text-brand-neon;
+    }
+
+    @keyframes glitch {
+        0% {
+            transform: translate(0)
+        }
+
+        20% {
+            transform: translate(-2px, 2px)
+        }
+
+        40% {
+            transform: translate(-2px, -2px)
+        }
+
+        60% {
+            transform: translate(2px, 2px)
+        }
+
+        80% {
+            transform: translate(2px, -2px)
+        }
+
+        100% {
+            transform: translate(0)
+        }
+    }
+}
