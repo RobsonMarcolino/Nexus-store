@@ -22,7 +22,6 @@ const OrderStatus = ({ currentStep = 2 }: { currentStep?: number }) => {
                 {steps.map((step, index) => {
                     const Icon = step.icon;
                     const isActive = index <= currentStep;
-                    const isCompleted = index < currentStep;
 
                     return (
                         <div key={index} className="relative z-10 flex flex-col items-center">
